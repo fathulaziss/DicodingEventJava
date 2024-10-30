@@ -7,26 +7,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.data.response.ListEventsItem;
-import com.example.dicodingeventjava.databinding.FragmentFinishedBinding;
 import com.example.dicodingeventjava.databinding.FragmentUpcomingBinding;
 import com.example.dicodingeventjava.ui.EventAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingFragment extends Fragment {
 
     private FragmentUpcomingBinding binding;
-    private List<ListEventsItem> eventList;
 
     @Override
     public View onCreateView(
@@ -34,14 +28,19 @@ public class UpcomingFragment extends Fragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        UpcomingViewModel upcomingViewModel =
-                new ViewModelProvider(this).get(UpcomingViewModel.class);
-        upcomingViewModel.getListEvent().observe(getViewLifecycleOwner(), this::setReviewData);
-        upcomingViewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
-
         binding = FragmentUpcomingBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.rvEvent.setLayoutManager(layoutManager);
+
+        UpcomingViewModel upcomingViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(UpcomingViewModel.class);
+        upcomingViewModel.getListEvent().observe(getViewLifecycleOwner(), this::setEventData);
+        upcomingViewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
     }
 
     @Override
@@ -50,9 +49,8 @@ public class UpcomingFragment extends Fragment {
         binding = null;
     }
 
-    private void setReviewData(List<ListEventsItem> upcomingEvents) {
-        eventList.addAll(upcomingEvents);
-        EventAdapter eventAdapter = new EventAdapter(getContext(), eventList);
+    private void setEventData(List<ListEventsItem> upcomingEvents) {
+        EventAdapter eventAdapter = new EventAdapter(getContext(), upcomingEvents);
         binding.rvEvent.setAdapter(eventAdapter);
     }
 
