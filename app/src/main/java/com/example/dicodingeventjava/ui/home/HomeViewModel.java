@@ -46,7 +46,7 @@ public class HomeViewModel extends ViewModel {
                 _isLoadingUpcomingEvent.setValue(false);
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        _listUpcomingEvent.setValue(response.body().getListEvents());
+                        _listUpcomingEvent.setValue(response.body().getListEvents().subList(0, Math.min(response.body().getListEvents().size(), 5)));
                     }
                 } else {
                     if (response.body() != null) {
@@ -72,7 +72,7 @@ public class HomeViewModel extends ViewModel {
                 _isLoadingFinishedEvent.setValue(false);
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        _listFinishedEvent.setValue(response.body().getListEvents());
+                        _listFinishedEvent.setValue(response.body().getListEvents().subList(0, Math.min(response.body().getListEvents().size(), 5)));
                     }
                 } else {
                     if (response.body() != null) {
