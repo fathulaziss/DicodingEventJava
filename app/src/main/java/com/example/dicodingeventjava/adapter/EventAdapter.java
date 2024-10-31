@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui;
+package com.example.dicodingeventjava.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

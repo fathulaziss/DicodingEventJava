@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.dicodingeventjava.data.response.ListEventsItem;
 import com.example.dicodingeventjava.databinding.FragmentUpcomingBinding;
-import com.example.dicodingeventjava.ui.EventAdapter;
+import com.example.dicodingeventjava.adapter.EventAdapter;
 
 import java.util.List;
 
