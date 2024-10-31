@@ -12,7 +12,6 @@ import com.example.dicodingeventjava.data.response.ListEventsItem;
 import com.example.dicodingeventjava.data.retrofit.ApiConfig;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;

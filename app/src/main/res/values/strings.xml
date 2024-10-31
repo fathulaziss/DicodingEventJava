@@ -3,4 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_upcoming">Upcoming</string>
     <string name="title_finished">Finished</string>
+    <string name="search_here">Search Here</string>
+    <string name="dicoding_event">Dicoding Event</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="finished_events">Finished Events</string>
+    <string name="recommendation_event_for_you">Recommendation event for you!</string>
 </resources>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="Dicoding Event"
+        android:text="@string/dicoding_event"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="Recommendation event for you!"
+        android:text="@string/recommendation_event_for_you"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"
         tools:text="Recommendation event for you!" />

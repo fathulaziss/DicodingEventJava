@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dicoding Event"
+        android:text="@string/dicoding_event"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginHorizontal="16dp"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upcoming Events"
+        android:text="@string/upcoming_events"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginHorizontal="16dp"
@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Finished Events"
+        android:text="@string/finished_events"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginHorizontal="16dp"
