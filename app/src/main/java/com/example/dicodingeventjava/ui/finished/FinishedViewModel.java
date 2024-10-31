@@ -12,6 +12,7 @@ import com.example.dicodingeventjava.data.response.ListEventsItem;
 import com.example.dicodingeventjava.data.retrofit.ApiConfig;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +34,32 @@ public class FinishedViewModel extends ViewModel {
     public final void fetchFinishedEvent() {
         _isLoading.setValue(true);
         Call<EventResponse> client = ApiConfig.getApiService().getEvent(0);
+        client.enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
+                _isLoading.setValue(false);
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        _listEvent.setValue(response.body().getListEvents());
+                    }
+                } else {
+                    if (response.body() != null) {
+                        Log.e(TAG,"onFailure: " + response.body().getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<EventResponse> call, @NonNull Throwable t) {
+                _isLoading.setValue(false);
+                Log.e(TAG,"onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public final void searchFinishedEvent(String keyword) {
+        _isLoading.setValue(true);
+        Call<EventResponse> client = ApiConfig.getApiService().searchEvent(-1, keyword);
         client.enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {

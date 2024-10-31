@@ -1,5 +1,8 @@
 package com.example.dicodingeventjava.ui.finished;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.adapter.EventAdapter;
 import com.example.dicodingeventjava.data.response.ListEventsItem;
 import com.example.dicodingeventjava.databinding.FragmentFinishedBinding;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FinishedFragment extends Fragment {
 
@@ -41,6 +50,19 @@ public class FinishedFragment extends Fragment {
         FinishedViewModel finishedViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(FinishedViewModel.class);
         finishedViewModel.getListEvent().observe(getViewLifecycleOwner(), this::setEventData);
         finishedViewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
+
+        TextInputLayout ilSearch = view.findViewById(R.id.ilSearch);
+        TextInputEditText itSearch = view.findViewById(R.id.itSearch);
+
+        ilSearch.setEndIconOnClickListener(v -> {
+            dismissKeyboard(v);
+            String inputText = Objects.requireNonNull(itSearch.getText()).toString();
+            if (!inputText.isEmpty()) {
+                finishedViewModel.searchFinishedEvent(inputText);
+            } else {
+                finishedViewModel.fetchFinishedEvent();
+            }
+        });
     }
 
     @Override
@@ -59,6 +81,13 @@ public class FinishedFragment extends Fragment {
             binding.progressBar.setVisibility(View.VISIBLE);
         } else {
             binding.progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void dismissKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }
