@@ -60,7 +60,7 @@ public class DetailEventActivity extends AppCompatActivity {
         binding.tvEventName.setText(event.getName());
         binding.tvEventOwner.setText(String.format("Presented By : %s", event.getOwnerName()));
         binding.tvEventSchedule.setText(String.format("Date : %s", event.getBeginTime()));
-        binding.tvEventQuota.setText(String.format("Quota : %s", event.getQuota()));
+        binding.tvEventQuota.setText(String.format("Quota Tersedia : %s", event.getQuota() - event.getRegistrants()));
         binding.tvEventDescription.setText(Html.fromHtml(event.getDescription(), Html.FROM_HTML_MODE_COMPACT));
         Glide.with(DetailEventActivity.this)
                 .load(event.getMediaCover()) // Image URL

@@ -58,7 +58,7 @@ public class FinishedViewModel extends ViewModel {
 
     public final void searchFinishedEvent(String keyword) {
         _isLoading.setValue(true);
-        Call<EventResponse> client = ApiConfig.getApiService().searchEvent(-1, keyword);
+        Call<EventResponse> client = ApiConfig.getApiService().searchEvent(0, keyword);
         client.enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
