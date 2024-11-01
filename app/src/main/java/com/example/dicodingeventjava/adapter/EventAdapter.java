@@ -1,6 +1,8 @@
 package com.example.dicodingeventjava.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.data.response.ListEventsItem;
+import com.example.dicodingeventjava.ui.detail.DetailEventActivity;
 
 import java.util.List;
 
@@ -42,6 +45,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.tvEventName.setText(eventItem.getName());
         holder.tvEventCategory.setText(eventItem.getCategory());
         holder.tvEventLocation.setText(eventItem.getCityName());
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetailEventActivity.class);
+            intent.putExtra("id", eventItem.getId());
+            Log.d("Event Adapter","check id : " + eventItem.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
