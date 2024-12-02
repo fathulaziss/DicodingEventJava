@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_upcoming">Upcoming</string>
     <string name="title_finished">Finished</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_setting">Setting</string>
     <string name="search_here">Search Here</string>
     <string name="dicoding_event">Dicoding Event</string>
     <string name="upcoming_events">Upcoming Events</string>
@@ -10,4 +12,8 @@
     <string name="recommendation_event_for_you">Recommendation event for you!</string>
     <string name="register">Register</string>
     <string name="detail_event">Detail Event</string>
+    <string name="dark_mode_title">Dark Mode</string>
+    <string name="dark_mode_desc">Enable dark mode</string>
+    <string name="notification_title">Daily Reminder</string>
+    <string name="notification_desc">Enable notification</string>
 </resources>
