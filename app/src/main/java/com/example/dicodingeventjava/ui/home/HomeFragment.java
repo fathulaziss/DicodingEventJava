@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.dicodingeventjava.adapter.BannerAdapter;
 import com.example.dicodingeventjava.adapter.EventAdapter;
-import com.example.dicodingeventjava.data.response.ListEventsItem;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentHomeBinding;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    private void setUpcomingEventData(List<ListEventsItem> upcomingEventData) {
+    private void setUpcomingEventData(List<EventDto> upcomingEventData) {
         BannerAdapter bannerAdapter = new BannerAdapter(getContext(), upcomingEventData);
         binding.rvUpcomingEvent.setAdapter(bannerAdapter);
     }
@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setFinishedEventData(List<ListEventsItem> finishedEventData) {
+    private void setFinishedEventData(List<EventDto> finishedEventData) {
         EventAdapter eventAdapter = new EventAdapter(getContext(), finishedEventData);
         binding.rvFinishedEvent.setAdapter(eventAdapter);
     }

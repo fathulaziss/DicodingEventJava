@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dicodingeventjava.data.response.ListEventsItem;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentUpcomingBinding;
 import com.example.dicodingeventjava.adapter.EventAdapter;
 
@@ -49,7 +49,7 @@ public class UpcomingFragment extends Fragment {
         binding = null;
     }
 
-    private void setEventData(List<ListEventsItem> upcomingEvents) {
+    private void setEventData(List<EventDto> upcomingEvents) {
         EventAdapter eventAdapter = new EventAdapter(getContext(), upcomingEvents);
         binding.rvEvent.setAdapter(eventAdapter);
     }

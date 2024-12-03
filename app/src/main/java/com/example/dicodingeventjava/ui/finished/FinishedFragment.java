@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.adapter.EventAdapter;
-import com.example.dicodingeventjava.data.response.ListEventsItem;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentFinishedBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -71,7 +71,7 @@ public class FinishedFragment extends Fragment {
         binding = null;
     }
 
-    private void setEventData(List<ListEventsItem> finishedEvents) {
+    private void setEventData(List<EventDto> finishedEvents) {
         EventAdapter eventAdapter = new EventAdapter(getContext(), finishedEvents);
         binding.rvEvent.setAdapter(eventAdapter);
     }

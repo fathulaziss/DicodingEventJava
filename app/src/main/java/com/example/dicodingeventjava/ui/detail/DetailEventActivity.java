@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.data.response.Event;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.ActivityDetailEventBinding;
 
 public class DetailEventActivity extends AppCompatActivity {
@@ -56,7 +56,7 @@ public class DetailEventActivity extends AppCompatActivity {
         binding = null;
     }
 
-    private void setDetailEventData(Event event) {
+    private void setDetailEventData(EventDto event) {
         binding.tvEventName.setText(event.getName());
         binding.tvEventOwner.setText(String.format("Presented By : %s", event.getOwnerName()));
         binding.tvEventSchedule.setText(String.format("Date : %s", event.getBeginTime()));

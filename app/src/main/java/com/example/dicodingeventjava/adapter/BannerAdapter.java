@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.data.response.ListEventsItem;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.ui.detail.DetailEventActivity;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<ListEventsItem> listEvent;
+    private final List<EventDto> listEvent;
 
-    public BannerAdapter(Context context, List<ListEventsItem> listEvent) {
+    public BannerAdapter(Context context, List<EventDto> listEvent) {
         this.context = context;
         this.listEvent = listEvent;
     }
@@ -37,7 +37,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ListEventsItem eventItem = listEvent.get(position);
+        EventDto eventItem = listEvent.get(position);
         Glide.with(context)
                 .load(eventItem.getImageLogo()) // Image URL
                 .into(holder.ivEventImage);

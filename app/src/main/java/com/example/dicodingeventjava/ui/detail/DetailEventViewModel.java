@@ -7,10 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.dicodingeventjava.data.response.DetailEventResponse;
-import com.example.dicodingeventjava.data.response.Event;
-import com.example.dicodingeventjava.data.response.EventResponse;
-import com.example.dicodingeventjava.data.retrofit.ApiConfig;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
+import com.example.dicodingeventjava.data.server.response.EventDetailResponse;
+import com.example.dicodingeventjava.data.server.retrofit.ApiConfig;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,8 +18,8 @@ import retrofit2.Response;
 public class DetailEventViewModel extends ViewModel {
     private static final String TAG = "DetailEventViewModel";
 
-    private final MutableLiveData<Event> _detailEvent = new MutableLiveData<>();
-    public LiveData<Event> getDetailEvent() { return _detailEvent; }
+    private final MutableLiveData<EventDto> _detailEvent = new MutableLiveData<>();
+    public LiveData<EventDto> getDetailEvent() { return _detailEvent; }
 
     private final MutableLiveData<Boolean> _isLoadingDetailEvent = new MutableLiveData<>();
     public LiveData<Boolean> isLoadingDetailEvent() { return _isLoadingDetailEvent; }
@@ -28,10 +27,10 @@ public class DetailEventViewModel extends ViewModel {
 
     public final void fetchDetailEvent(int eventId) {
         _isLoadingDetailEvent.setValue(true);
-        Call<DetailEventResponse> client = ApiConfig.getApiService().getDetailEvent(eventId);
-        client.enqueue(new Callback<DetailEventResponse>() {
+        Call<EventDetailResponse> client = ApiConfig.getApiService().getDetailEvent(eventId);
+        client.enqueue(new Callback<EventDetailResponse>() {
             @Override
-            public void onResponse(@NonNull Call<DetailEventResponse> call, @NonNull Response<DetailEventResponse> response) {
+            public void onResponse(@NonNull Call<EventDetailResponse> call, @NonNull Response<EventDetailResponse> response) {
                 _isLoadingDetailEvent.setValue(false);
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
@@ -45,7 +44,7 @@ public class DetailEventViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<DetailEventResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<EventDetailResponse> call, @NonNull Throwable t) {
                 _isLoadingDetailEvent.setValue(false);
                 Log.e(TAG,"onFailure: " + t.getMessage());
             }

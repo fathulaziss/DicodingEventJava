@@ -29,14 +29,37 @@
             android:orientation="vertical"
             tools:ignore="ScrollViewSize">
 
-            <ImageView
-                android:id="@+id/ivEventImage"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:importantForAccessibility="no"
-                android:scaleType="fitXY"
-                android:layout_marginBottom="24dp"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/ivEventImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="24dp"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite_outline_black_24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/rectangle_button_background"
+                    app:layout_constraintTop_toTopOf="@+id/ivEventImage"
+                    app:layout_constraintTop_toBottomOf="@+id/ivEventImage"
+                    app:layout_constraintEnd_toEndOf="@+id/ivEventImage"
+                    tools:ignore="ContentDescription,MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/tvEventName"

@@ -1,7 +1,7 @@
-package com.example.dicodingeventjava.data.retrofit;
+package com.example.dicodingeventjava.data.server.retrofit;
 
-import com.example.dicodingeventjava.data.response.DetailEventResponse;
-import com.example.dicodingeventjava.data.response.EventResponse;
+import com.example.dicodingeventjava.data.server.response.EventDetailResponse;
+import com.example.dicodingeventjava.data.server.response.EventResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,7 +13,7 @@ public interface ApiService {
     Call<EventResponse> getEvent(@Query("active") int active);
 
     @GET("events/{id}")
-    Call<DetailEventResponse> getDetailEvent(@Path("id") int id);
+    Call<EventDetailResponse> getDetailEvent(@Path("id") int id);
 
     @GET("events")
     Call<EventResponse> searchEvent(@Query("active") int active, @Query("q") String q);

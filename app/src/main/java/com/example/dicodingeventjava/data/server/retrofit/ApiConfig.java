@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.data.retrofit;
+package com.example.dicodingeventjava.data.server.retrofit;
 
 import com.example.dicodingeventjava.BuildConfig;
 

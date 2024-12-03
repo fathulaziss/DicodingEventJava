@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.dicodingeventjava.data.response.EventResponse;
-import com.example.dicodingeventjava.data.response.ListEventsItem;
-import com.example.dicodingeventjava.data.retrofit.ApiConfig;
+import com.example.dicodingeventjava.data.server.dto.EventDto;
+import com.example.dicodingeventjava.data.server.response.EventResponse;
+import com.example.dicodingeventjava.data.server.retrofit.ApiConfig;
 
 import java.util.List;
 
@@ -20,8 +20,8 @@ import retrofit2.Response;
 public class FinishedViewModel extends ViewModel {
     private static final String TAG = "FinishedViewModel";
 
-    private final MutableLiveData<List<ListEventsItem>> _listEvent = new MutableLiveData<>();
-    public LiveData<List<ListEventsItem>> getListEvent() { return _listEvent; }
+    private final MutableLiveData<List<EventDto>> _listEvent = new MutableLiveData<>();
+    public LiveData<List<EventDto>> getListEvent() { return _listEvent; }
 
     private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>();
     public final LiveData<Boolean> isLoading() { return _isLoading; }
