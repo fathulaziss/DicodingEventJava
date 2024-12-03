@@ -1,6 +1,4 @@
-package com.example.dicodingeventjava.ui.finished;
-
-import static androidx.core.content.ContextCompat.getSystemService;
+package com.example.dicodingeventjava.ui.fragment.finished;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,12 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.adapter.EventAdapter;
+import com.example.dicodingeventjava.ui.adapter.EventAdapter;
 import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentFinishedBinding;
+import com.example.dicodingeventjava.ui.viewmodel.FinishedViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

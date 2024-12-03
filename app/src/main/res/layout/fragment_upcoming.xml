@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.upcoming.UpcomingFragment">
+    tools:context=".ui.fragment.upcoming.UpcomingFragment">
 
     <TextView
         android:layout_width="match_parent"

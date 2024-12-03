@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.upcoming;
+package com.example.dicodingeventjava.ui.fragment.upcoming;
 
 import android.os.Bundle;
 
@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentUpcomingBinding;
-import com.example.dicodingeventjava.adapter.EventAdapter;
+import com.example.dicodingeventjava.ui.adapter.EventAdapter;
+import com.example.dicodingeventjava.ui.viewmodel.UpcomingViewModel;
 
 import java.util.List;
 

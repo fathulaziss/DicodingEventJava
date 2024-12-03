@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.viewmodel;
+package com.example.dicodingeventjava.ui.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

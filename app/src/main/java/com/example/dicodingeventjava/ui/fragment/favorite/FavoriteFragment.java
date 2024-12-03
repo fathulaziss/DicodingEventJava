@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.favorite;
+package com.example.dicodingeventjava.ui.fragment.favorite;
 
 import android.os.Bundle;
 

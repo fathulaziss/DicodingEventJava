@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.dicodingeventjava.ui.home.HomeFragment"
+        android:name="com.example.dicodingeventjava.ui.fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_upcoming"
-        android:name="com.example.dicodingeventjava.ui.upcoming.UpcomingFragment"
+        android:name="com.example.dicodingeventjava.ui.fragment.upcoming.UpcomingFragment"
         android:label="@string/title_upcoming"
         tools:layout="@layout/fragment_upcoming" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_finished"
-        android:name="com.example.dicodingeventjava.ui.finished.FinishedFragment"
+        android:name="com.example.dicodingeventjava.ui.fragment.finished.FinishedFragment"
         android:label="@string/title_finished"
         tools:layout="@layout/fragment_finished" >
         <action
@@ -34,20 +34,20 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.example.dicodingeventjava.ui.favorite.FavoriteFragment"
+        android:name="com.example.dicodingeventjava.ui.fragment.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
         tools:layout="@layout/fragment_favorite" >
     </fragment>
     <fragment
         android:id="@+id/navigation_setting"
-        android:name="com.example.dicodingeventjava.ui.setting.SettingFragment"
+        android:name="com.example.dicodingeventjava.ui.fragment.setting.SettingFragment"
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_setting" >
 
     </fragment>
     <activity
         android:id="@+id/detailEventActivity"
-        android:name="com.example.dicodingeventjava.ui.detail.DetailEventActivity"
+        android:name="com.example.dicodingeventjava.ui.activity.DetailEventActivity"
         android:label="activity_detail_event"
         tools:layout="@layout/activity_detail_event" />
 

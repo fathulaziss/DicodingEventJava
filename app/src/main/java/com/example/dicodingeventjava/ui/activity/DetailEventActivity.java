@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.detail;
+package com.example.dicodingeventjava.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.ActivityDetailEventBinding;
+import com.example.dicodingeventjava.ui.viewmodel.DetailEventViewModel;
 
 public class DetailEventActivity extends AppCompatActivity {
 

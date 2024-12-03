@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.home;
+package com.example.dicodingeventjava.ui.viewmodel;
 
 import android.util.Log;
 

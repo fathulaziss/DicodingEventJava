@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.finished;
+package com.example.dicodingeventjava.ui.viewmodel;
 
 import android.util.Log;
 

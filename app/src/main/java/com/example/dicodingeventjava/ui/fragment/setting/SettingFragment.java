@@ -1,22 +1,18 @@
-package com.example.dicodingeventjava.ui.setting;
+package com.example.dicodingeventjava.ui.fragment.setting;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.databinding.FragmentSettingBinding;
 import com.example.dicodingeventjava.util.SharedPreferenceUtil;
-import com.example.dicodingeventjava.viewmodel.DarkModeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.DarkModeViewModel;
 
 public class SettingFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.ui.home;
+package com.example.dicodingeventjava.ui.fragment.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.dicodingeventjava.adapter.BannerAdapter;
-import com.example.dicodingeventjava.adapter.EventAdapter;
+import com.example.dicodingeventjava.ui.adapter.BannerAdapter;
+import com.example.dicodingeventjava.ui.adapter.EventAdapter;
 import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentHomeBinding;
+import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
 
 import java.util.List;
 

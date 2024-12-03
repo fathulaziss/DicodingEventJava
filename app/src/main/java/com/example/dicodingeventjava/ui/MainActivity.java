@@ -1,10 +1,8 @@
-package com.example.dicodingeventjava;
+package com.example.dicodingeventjava.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 
+import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.util.SharedPreferenceUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
