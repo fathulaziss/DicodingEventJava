@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,17 +12,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.ui.adapter.BannerAdapter;
 import com.example.dicodingeventjava.ui.adapter.EventAdapter;
 import com.example.dicodingeventjava.data.server.dto.EventDto;
 import com.example.dicodingeventjava.databinding.FragmentHomeBinding;
 import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private EventAdapter eventAdapter;
+    private BannerAdapter bannerAdapter;
 
     public View onCreateView(
             @NonNull LayoutInflater inflater,
@@ -37,14 +42,44 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager layoutManagerUpcomingEvent = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.rvUpcomingEvent.setLayoutManager(layoutManagerUpcomingEvent);
+        bannerAdapter = new BannerAdapter(getContext(), null);
+
         LinearLayoutManager layoutManagerFinishedEvent = new LinearLayoutManager(getContext());
         binding.rvFinishedEvent.setLayoutManager(layoutManagerFinishedEvent);
+        eventAdapter = new EventAdapter(getContext(), null);
 
-        HomeViewModel homeViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(HomeViewModel.class);
-        homeViewModel.getListUpcomingEvent().observe(getViewLifecycleOwner(), this::setUpcomingEventData);
-        homeViewModel.isLoadingFinishedEvent().observe(getViewLifecycleOwner(), this::showUpcomingEventLoading);
-        homeViewModel.getListFinishedEvent().observe(getViewLifecycleOwner(), this::setFinishedEventData);
-        homeViewModel.isLoadingFinishedEvent().observe(getViewLifecycleOwner(), this::showFinishedEventLoading);
+        ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
+        HomeViewModel viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+
+        viewModel.fetchUpcomingEvent().observe(getViewLifecycleOwner(), result -> {
+            if (result != null) {
+                if (result instanceof Result.Loading) {
+                    showUpcomingEventLoading(true);
+                } else if (result instanceof Result.Success) {
+                    showUpcomingEventLoading(false);
+                    List<EventDto> events = ((Result.Success<List<EventDto>>) result).getData();
+                    setUpcomingEventData(events);
+                } else if (result instanceof Result.Error) {
+                    showUpcomingEventLoading(false);
+                    Toast.makeText(getContext(), "Terjadi kesalahan"+ ((Result.Error<?>) result).getError(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        viewModel.fetchFinishedEvent().observe(getViewLifecycleOwner(), result -> {
+            if (result != null) {
+                if (result instanceof Result.Loading) {
+                    showFinishedEventLoading(true);
+                } else if (result instanceof Result.Success) {
+                    showFinishedEventLoading(false);
+                    List<EventDto> events = ((Result.Success<List<EventDto>>) result).getData();
+                    setFinishedEventData(events);
+                } else if (result instanceof Result.Error) {
+                    showFinishedEventLoading(false);
+                    Toast.makeText(getContext(), "Terjadi kesalahan"+ ((Result.Error<?>) result).getError(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -54,7 +89,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpcomingEventData(List<EventDto> upcomingEventData) {
-        BannerAdapter bannerAdapter = new BannerAdapter(getContext(), upcomingEventData);
+        bannerAdapter = new BannerAdapter(getContext(), upcomingEventData);
         binding.rvUpcomingEvent.setAdapter(bannerAdapter);
     }
 
@@ -67,7 +102,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setFinishedEventData(List<EventDto> finishedEventData) {
-        EventAdapter eventAdapter = new EventAdapter(getContext(), finishedEventData);
+        eventAdapter = new EventAdapter(getContext(), finishedEventData);
         binding.rvFinishedEvent.setAdapter(eventAdapter);
     }
 

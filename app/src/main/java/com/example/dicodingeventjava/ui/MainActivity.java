@@ -3,7 +3,7 @@ package com.example.dicodingeventjava.ui;
 import android.os.Bundle;
 
 import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.util.SharedPreferenceUtil;
+import com.example.dicodingeventjava.utils.SharedPreferenceUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

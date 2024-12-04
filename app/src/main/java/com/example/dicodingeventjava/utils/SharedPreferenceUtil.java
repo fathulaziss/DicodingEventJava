@@ -1,4 +1,4 @@
-package com.example.dicodingeventjava.util;
+package com.example.dicodingeventjava.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

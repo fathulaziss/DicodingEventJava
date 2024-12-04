@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dicodingeventjava.databinding.FragmentSettingBinding;
-import com.example.dicodingeventjava.util.SharedPreferenceUtil;
+import com.example.dicodingeventjava.utils.SharedPreferenceUtil;
 import com.example.dicodingeventjava.ui.viewmodel.DarkModeViewModel;
 
 public class SettingFragment extends Fragment {
