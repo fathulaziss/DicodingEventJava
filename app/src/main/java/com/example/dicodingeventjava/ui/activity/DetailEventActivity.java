@@ -20,7 +20,7 @@ import com.example.dicodingeventjava.R;
 import com.example.dicodingeventjava.data.local.entity.Event;
 import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.databinding.ActivityDetailEventBinding;
-import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.EventViewModel;
 import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 
 public class DetailEventActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class DetailEventActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.purple_700));
 
         ViewModelFactory factory = ViewModelFactory.getInstance(this);
-        HomeViewModel viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+        EventViewModel viewModel = new ViewModelProvider(this, factory).get(EventViewModel.class);
 
         Intent intent = getIntent();
         if (intent != null) {

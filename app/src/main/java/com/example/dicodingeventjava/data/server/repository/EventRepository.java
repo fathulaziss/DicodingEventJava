@@ -52,7 +52,7 @@ public class EventRepository {
     public LiveData<Result<List<Event>>> fetchUpcomingEvent() {
         listUpcomingEvent.setValue(new Result.Loading<>());
 
-        Call<EventResponse> client = apiService.getEvent(1);
+        Call<EventResponse> client = apiService.getEvent(-1,5);
         client.enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
@@ -77,7 +77,7 @@ public class EventRepository {
                                         false
                                 ))
                                 .collect(Collectors.toList());
-                        listUpcomingEvent.setValue(new Result.Success<>(events.subList(0, Math.min(events.size(), 5))));
+                        listUpcomingEvent.setValue(new Result.Success<>(events));
                     }else {
                         eventDetail.setValue(new Result.Error<>(response.message()));
                     }
@@ -96,7 +96,7 @@ public class EventRepository {
     public LiveData<Result<List<Event>>> fetchFinishedEvent() {
         listFinishedEvent.setValue(new Result.Loading<>());
 
-        Call<EventResponse> client = apiService.getEvent(0);
+        Call<EventResponse> client = apiService.getEvent(0,5);
         client.enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
@@ -121,7 +121,7 @@ public class EventRepository {
                                         false
                                 ))
                                 .collect(Collectors.toList());
-                        listFinishedEvent.setValue(new Result.Success<>(events.subList(0, Math.min(events.size(), 5))));
+                        listFinishedEvent.setValue(new Result.Success<>(events));
                     }
                 } else {
                     eventDetail.setValue(new Result.Error<>(response.message()));

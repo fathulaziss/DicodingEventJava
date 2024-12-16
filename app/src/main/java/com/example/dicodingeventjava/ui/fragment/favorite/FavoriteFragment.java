@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.example.dicodingeventjava.data.local.entity.Event;
 import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.databinding.FragmentFavoriteBinding;
 import com.example.dicodingeventjava.ui.adapter.EventAdapter;
-import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.EventViewModel;
 import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class FavoriteFragment extends Fragment {
 
     private FragmentFavoriteBinding binding;
     private EventAdapter eventAdapter;
-    private HomeViewModel viewModel;
+    private EventViewModel viewModel;
     private List<Event> events = new ArrayList<>();
 
     @Override
@@ -51,7 +50,7 @@ public class FavoriteFragment extends Fragment {
         eventAdapter = new EventAdapter(getContext(), events);
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
-        viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(EventViewModel.class);
     }
 
     @Override

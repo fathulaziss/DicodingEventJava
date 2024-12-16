@@ -17,7 +17,7 @@ import com.example.dicodingeventjava.data.local.entity.Event;
 import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.databinding.FragmentUpcomingBinding;
 import com.example.dicodingeventjava.ui.adapter.EventAdapter;
-import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.EventViewModel;
 import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class UpcomingFragment extends Fragment {
         eventAdapter = new EventAdapter(getContext(), events);
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
-        HomeViewModel viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+        EventViewModel viewModel = new ViewModelProvider(this, factory).get(EventViewModel.class);
 
         viewModel.fetchUpcomingEvent().observe(getViewLifecycleOwner(), result -> {
             if (result != null) {

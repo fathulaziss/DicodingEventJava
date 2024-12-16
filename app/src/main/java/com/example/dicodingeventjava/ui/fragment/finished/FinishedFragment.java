@@ -19,7 +19,7 @@ import com.example.dicodingeventjava.data.local.entity.Event;
 import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.ui.adapter.EventAdapter;
 import com.example.dicodingeventjava.databinding.FragmentFinishedBinding;
-import com.example.dicodingeventjava.ui.viewmodel.HomeViewModel;
+import com.example.dicodingeventjava.ui.viewmodel.EventViewModel;
 import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class FinishedFragment extends Fragment {
 
     private FragmentFinishedBinding binding;
     private EventAdapter eventAdapter;
-    private HomeViewModel viewModel;
+    private EventViewModel viewModel;
     private List<Event> events = new ArrayList<>();
 
     @Override
@@ -53,7 +53,7 @@ public class FinishedFragment extends Fragment {
         eventAdapter = new EventAdapter(getContext(), events);
 
         ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
-        viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(EventViewModel.class);
 
         viewModel.fetchFinishedEvent().observe(getViewLifecycleOwner(), result -> {
             if (result != null) {

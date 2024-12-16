@@ -10,7 +10,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("events")
-    Call<EventResponse> getEvent(@Query("active") int active);
+    Call<EventResponse> getEvent(@Query("active") int active,
+                                 @Query("limit") int limit);
 
     @GET("events/{id}")
     Call<EventDetailResponse> getDetailEvent(@Path("id") int id);

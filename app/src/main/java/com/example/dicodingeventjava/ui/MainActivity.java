@@ -18,7 +18,7 @@ import com.example.dicodingeventjava.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    SharedPreferenceUtil pref;
+    private SharedPreferenceUtil pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home,
                 R.id.navigation_upcoming,
                 R.id.navigation_finished,
                 R.id.navigation_favorite,
