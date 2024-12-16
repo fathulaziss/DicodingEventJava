@@ -42,7 +42,7 @@ public class Event {
     private String name;
 
     @ColumnInfo(name = "event_id")
-    private int EventId;
+    private int eventId;
 
     @ColumnInfo(name = "begin_time")
     private String beginTime;
@@ -52,6 +52,27 @@ public class Event {
 
     @ColumnInfo(name = "category")
     private String category;
+
+    @ColumnInfo(name = "is_favorite")
+    private Boolean isFavorite;
+
+    public Event(String summary, String mediaCover, int registrants, String imageLogo, String link, String description, String ownerName, String cityName, int quota, String name, int eventId, String beginTime, String endTime, String category, Boolean isFavorite) {
+        this.summary = summary;
+        this.mediaCover = mediaCover;
+        this.registrants = registrants;
+        this.imageLogo = imageLogo;
+        this.link = link;
+        this.description = description;
+        this.ownerName = ownerName;
+        this.cityName = cityName;
+        this.quota = quota;
+        this.name = name;
+        this.eventId = eventId;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+        this.category = category;
+        this.isFavorite = isFavorite;
+    }
 
     public int getId() {
         return id;
@@ -142,11 +163,11 @@ public class Event {
     }
 
     public int getEventId() {
-        return EventId;
+        return eventId;
     }
 
     public void setEventId(int eventId) {
-        EventId = eventId;
+        eventId = eventId;
     }
 
     public String getBeginTime() {
@@ -171,5 +192,13 @@ public class Event {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
 }

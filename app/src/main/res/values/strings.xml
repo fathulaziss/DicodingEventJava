@@ -10,6 +10,7 @@
     <string name="upcoming_events">Upcoming Events</string>
     <string name="finished_events">Finished Events</string>
     <string name="recommendation_event_for_you">Recommendation event for you!</string>
+    <string name="favorite_event">Your favorite event</string>
     <string name="register">Register</string>
     <string name="detail_event">Detail Event</string>
     <string name="dark_mode_title">Dark Mode</string>

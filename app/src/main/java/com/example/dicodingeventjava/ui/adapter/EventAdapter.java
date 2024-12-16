@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.data.server.dto.EventDto;
+import com.example.dicodingeventjava.data.local.entity.Event;
 import com.example.dicodingeventjava.ui.activity.DetailEventActivity;
 
 import java.util.List;
@@ -22,9 +22,9 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<EventDto> listEvent;
+    private final List<Event> listEvent;
 
-    public EventAdapter(Context context, List<EventDto> listEvent) {
+    public EventAdapter(Context context, List<Event> listEvent) {
         this.context = context;
         this.listEvent = listEvent;
     }
@@ -38,7 +38,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull EventAdapter.ViewHolder holder, int position) {
-        EventDto eventItem = listEvent.get(position);
+        Event eventItem = listEvent.get(position);
         Glide.with(context)
                 .load(eventItem.getImageLogo()) // Image URL
                 .into(holder.ivEventImage);
@@ -47,8 +47,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.tvEventLocation.setText(eventItem.getCityName());
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailEventActivity.class);
-            intent.putExtra("id", eventItem.getId());
-            Log.d("Event Adapter","check id : " + eventItem.getId());
+            intent.putExtra("id", eventItem.getEventId());
             context.startActivity(intent);
         });
     }

@@ -11,6 +11,8 @@ import com.example.dicodingeventjava.data.local.entity.Event;
 
 @Database(entities = { Event.class }, version = 1, exportSchema = false)
 public abstract class DatabaseApp extends RoomDatabase {
+    public abstract EventDao eventDao();
+
     private static DatabaseApp INSTANCE;
 
     public static DatabaseApp getDatabaseApp(Context context) {
@@ -20,6 +22,4 @@ public abstract class DatabaseApp extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-    public abstract EventDao eventDao();
 }

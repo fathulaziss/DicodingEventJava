@@ -2,6 +2,7 @@ package com.example.dicodingeventjava.data.server.dto;
 
 import androidx.annotation.NonNull;
 
+import com.example.dicodingeventjava.data.local.entity.Event;
 import com.google.gson.annotations.SerializedName;
 
 public class EventDto {
