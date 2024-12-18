@@ -2,6 +2,8 @@ package com.example.dicodingeventjava.di;
 
 import android.content.Context;
 
+import androidx.work.WorkManager;
+
 import com.example.dicodingeventjava.data.local.dao.EventDao;
 import com.example.dicodingeventjava.data.local.database.DatabaseApp;
 import com.example.dicodingeventjava.data.server.repository.EventRepository;

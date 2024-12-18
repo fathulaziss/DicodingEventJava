@@ -17,4 +17,6 @@
     <string name="dark_mode_desc">Enable dark mode</string>
     <string name="notification_title">Daily Reminder</string>
     <string name="notification_desc">Enable notification</string>
+    <string name="status">Status :</string>
+    <string name="cancel_periodic_task">Cancel Periodic Task</string>
 </resources>
