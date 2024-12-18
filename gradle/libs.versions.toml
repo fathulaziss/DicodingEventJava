@@ -3,6 +3,7 @@ agp = "8.5.2"
 androidAsyncHttp = "1.4.10"
 converterGson = "2.9.0"
 glide = "4.16.0"
+guava = "29.0-android"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -25,6 +26,7 @@ android-async-http = { module = "com.loopj.android:android-async-http", version.
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

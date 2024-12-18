@@ -19,4 +19,5 @@
     <string name="notification_desc">Enable notification</string>
     <string name="status">Status :</string>
     <string name="cancel_periodic_task">Cancel Periodic Task</string>
+    <string name="run_periodic_task">Run Periodic Task</string>
 </resources>

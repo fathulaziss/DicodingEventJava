@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.room.compiler)
     implementation(libs.androidx.work.runtime)
     implementation(libs.android.async.http)
+    implementation(libs.guava)
     annotationProcessor(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

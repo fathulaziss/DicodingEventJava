@@ -1,5 +1,6 @@
 package com.example.dicodingeventjava.ui.fragment.setting;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Build;
 import android.Manifest;
@@ -10,30 +11,21 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.work.Constraints;
-import androidx.work.Data;
 import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.dicodingeventjava.R;
-import com.example.dicodingeventjava.data.local.entity.Event;
-import com.example.dicodingeventjava.data.server.Result;
 import com.example.dicodingeventjava.databinding.FragmentSettingBinding;
-import com.example.dicodingeventjava.ui.viewmodel.ViewModelFactory;
 import com.example.dicodingeventjava.utils.MyWorker;
 import com.example.dicodingeventjava.utils.SharedPreferenceUtil;
-import com.example.dicodingeventjava.ui.viewmodel.DarkModeViewModel;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SettingFragment extends Fragment {
@@ -42,8 +34,6 @@ public class SettingFragment extends Fragment {
     private SharedPreferenceUtil util;
     private WorkManager workManager;
     private PeriodicWorkRequest periodicWorkRequest;
-    private Event event;
-    private DarkModeViewModel viewModel;
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(
                     new ActivityResultContracts.RequestPermission(),
@@ -59,6 +49,7 @@ public class SettingFragment extends Fragment {
                     }
             );
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater,
@@ -67,76 +58,43 @@ public class SettingFragment extends Fragment {
     ) {
         binding = FragmentSettingBinding.inflate(inflater, container, false);
         util = new  SharedPreferenceUtil(requireContext());
-        ViewModelFactory factory = ViewModelFactory.getInstance(requireContext());
-        viewModel = new ViewModelProvider(this, factory).get(DarkModeViewModel.class);
 
         workManager = WorkManager.getInstance(requireContext());
-
-        viewModel.fetchActiveEvent().observe(getViewLifecycleOwner(), result -> {
-            if (result != null) {
-                if (result instanceof Result.Loading) {
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                } else if (result instanceof Result.Success) {
-                    binding.progressBar.setVisibility(View.GONE);
-                    List<Event> events = ((Result.Success<List<Event>>) result).getData();
-                    if (!events.isEmpty()) {
-                        event = events.get(0);
-                    }
-                } else if (result instanceof Result.Error) {
-                    binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Terjadi kesalahan: "+ ((Result.Error<?>) result).getError(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         if (Build.VERSION.SDK_INT >= 33) {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
         }
 
-        binding.swDarkMode.setOnCheckedChangeListener((buttonView, isDarkMode) -> {
-            util.setDarkMode(isDarkMode);
-            viewModel.setDarkMode(isDarkMode);
-        });
-
-        binding.swNotification.setOnCheckedChangeListener((buttonView, isNotificationActive) -> {
-            Log.d("SettingFragment", "isNotificationActive: " + isNotificationActive);
-            binding.swNotification.setChecked(!isNotificationActive);
-//            if (!isNotificationActive) {
-//                startPeriodicTask();
-//            } else {
-//                cancelPeriodicTask();
-//            }
-        });
-
-        viewModel.setDarkMode(util.isDarkMode());
-        viewModel.isDarkMode().observe(getViewLifecycleOwner(), isDarkMode -> {
-            binding.swDarkMode.setChecked(isDarkMode);
-            if (isDarkMode) {
+        binding.swDarkMode.setChecked(util.isDarkMode());
+        binding.swDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                util.setDarkMode(true);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                util.setDarkMode(false);
             }
         });
 
-        viewModel.setNotification(util.isNotification());
-        viewModel.isNotification().observe(getViewLifecycleOwner(), isNotificationActive -> binding.swNotification.setChecked(isNotificationActive));
+        binding.swNotification.setChecked(util.isNotification());
+        binding.swNotification.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                startPeriodicTask();
+            } else {
+                cancelPeriodicTask();
+            }
+        });
 
         return binding.getRoot();
     }
 
     private void startPeriodicTask() {
-        binding.textStatus.setText(getString(R.string.status));
-
-        Data data = new Data.Builder()
-                .putString(MyWorker.EXTRA_CITY, "Jakarta")
-                .build();
 
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build();
 
         periodicWorkRequest = new PeriodicWorkRequest.Builder(MyWorker.class, 15, TimeUnit.MINUTES)
-                .setInputData(data)
                 .setConstraints(constraints)
                 .build();
 
@@ -144,18 +102,21 @@ public class SettingFragment extends Fragment {
 
         workManager.getWorkInfoByIdLiveData(periodicWorkRequest.getId())
                 .observe(getViewLifecycleOwner(), workInfo -> {
-                    String status = workInfo.getState().name();
-                    binding.textStatus.append("\n"+status);
-                    binding.btnCancelTask.setEnabled(false);
-                    if (workInfo.getState() == WorkInfo.State.ENQUEUED){
-                        binding.btnCancelTask.setEnabled(true);
+                    if (workInfo.getState() == WorkInfo.State.ENQUEUED) {
+                        util.setNotificationId(periodicWorkRequest.getId());
+                        util.setNotification(true);
+                        binding.swNotification.setChecked(true);
+                    } else if (workInfo.getState() == WorkInfo.State.FAILED) {
+                        util.setNotification(false);
+                        binding.swNotification.setChecked(false);
                     }
                 });
     }
 
     private void cancelPeriodicTask() {
-        workManager.cancelWorkById(periodicWorkRequest.getId());
-        util.setNotification(false);
-        viewModel.setNotification(false);
+        if (util.getNotificationId() != null) {
+            workManager.cancelWorkById(util.getNotificationId());
+            util.setNotification(false);
+        }
     }
 }

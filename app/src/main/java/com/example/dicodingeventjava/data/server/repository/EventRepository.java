@@ -3,7 +3,6 @@ package com.example.dicodingeventjava.data.server.repository;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.work.WorkManager;
 
 import com.example.dicodingeventjava.data.local.dao.EventDao;
 import com.example.dicodingeventjava.data.local.entity.Event;
@@ -31,7 +30,6 @@ public class EventRepository {
     private final MediatorLiveData<Result<List<Event>>> listUpcomingEvent = new MediatorLiveData<>();
     private final MediatorLiveData<Result<List<Event>>> listFinishedEvent = new MediatorLiveData<>();
     private final MediatorLiveData<Result<List<Event>>> listFavoriteEvent = new MediatorLiveData<>();
-    private final MediatorLiveData<Result<List<Event>>> listActiveEvent = new MediatorLiveData<>();
     private final MediatorLiveData<Result<Event>> eventDetail = new MediatorLiveData<>();
 
     private EventRepository(@NonNull ApiService apiService, EventDao eventDao, AppExecutors appExecutors) {
@@ -52,7 +50,7 @@ public class EventRepository {
     public LiveData<Result<List<Event>>> fetchUpcomingEvent() {
         listUpcomingEvent.setValue(new Result.Loading<>());
 
-        Call<EventResponse> client = apiService.getEvent(-1,5);
+        Call<EventResponse> client = apiService.getEvent(1,5);
         client.enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
@@ -311,49 +309,5 @@ public class EventRepository {
             eventDao.updateFavoriteEvent(0, eventData.getEventId());
             eventDetail.postValue(new Result.Success<>(event));
         });
-    }
-
-    public LiveData<Result<List<Event>>> fetchActiveEvent() {
-        listActiveEvent.setValue(new Result.Loading<>());
-
-        Call<EventResponse> client = apiService.getEvent(-1,1);
-        client.enqueue(new Callback<EventResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<EventResponse> call, @NonNull Response<EventResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        List<Event> events = response.body().getListEvents()
-                                .stream().map(eventDto -> new Event(
-                                        eventDto.getSummary(),
-                                        eventDto.getMediaCover(),
-                                        eventDto.getRegistrants(),
-                                        eventDto.getImageLogo(),
-                                        eventDto.getLink(),
-                                        eventDto.getDescription(),
-                                        eventDto.getOwnerName(),
-                                        eventDto.getCityName(),
-                                        eventDto.getQuota(),
-                                        eventDto.getName(),
-                                        eventDto.getId(),
-                                        eventDto.getBeginTime(),
-                                        eventDto.getEndTime(),
-                                        eventDto.getCategory(),
-                                        false
-                                ))
-                                .collect(Collectors.toList());
-                        listActiveEvent.setValue(new Result.Success<>(events));
-                    }else {
-                        listActiveEvent.setValue(new Result.Error<>(response.message()));
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<EventResponse> call, @NonNull Throwable t) {
-                listActiveEvent.setValue(new Result.Error<>(t.getLocalizedMessage()));
-            }
-        });
-
-        return listActiveEvent;
     }
 }

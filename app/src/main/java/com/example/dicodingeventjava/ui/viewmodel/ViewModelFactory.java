@@ -33,8 +33,6 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(EventViewModel.class)) {
             return (T) new EventViewModel(eventRepository);
-        } else if (modelClass.isAssignableFrom(DarkModeViewModel.class)) {
-            return (T) new DarkModeViewModel(eventRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

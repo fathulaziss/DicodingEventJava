@@ -97,21 +97,6 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/status" />
-
-        <Button
-            android:id="@+id/btnCancelTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="@string/cancel_periodic_task" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
